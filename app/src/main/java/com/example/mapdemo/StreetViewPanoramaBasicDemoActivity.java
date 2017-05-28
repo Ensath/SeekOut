@@ -31,6 +31,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity {
 
     // George St, Sydney
     private static final LatLng SYDNEY = new LatLng(-33.87365, 151.20689);
+    private static final LatLng PSU = new LatLng(45.5110, -122.6832);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity {
                         // Only set the panorama to SYDNEY on startup (when no panoramas have been
                         // loaded which is when the savedInstanceState is null).
                         if (savedInstanceState == null) {
-                            panorama.setPosition(SYDNEY);
+                            panorama.setPosition(PSU);
                         }
                     }
                 });
