@@ -3,6 +3,8 @@ SeekOut
 
 An exercise and exploration app
 
+Copyright (c) 2017 Noah Freed
+
 This code is built off of a set of demos for the Google Maps Android API. Those demos can be found at https://github.com/googlemaps/android-samples/tree/master/ApiDemos.
 
 License
