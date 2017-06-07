@@ -18,21 +18,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/latitude"
+    <TextView
+        android:id="@+id/distQ"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Latitude"
-        android:inputType="numberSigned|numberDecimal" />
+        android:padding="5dp"
+        android:text="@string/distance_question"
+        android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/longitude"
+        android:id="@+id/distance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Longitude"
-        android:inputType="numberSigned|numberDecimal" />
+        android:inputType="numberDecimal"
+        android:text="@string/default_distance" />
+
+    <Button
+        android:id="@+id/genButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/generate_panorama" />
+
+    <Button
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/view_panorama" />
+
+    <Button
+        android:id="@+id/checkButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/made_it" />
 
     <ListView
         android:id="@+id/list"
