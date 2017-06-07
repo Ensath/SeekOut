@@ -118,7 +118,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
     }
 
     private void findDestination() {
-        if(MainActivity.generate) {
+        if(MainActivity.getGenerate()) {
             LatLng start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             double angle = 2 * PI * random();
             double distance = (.7525 + .2508 * random()) / 2;

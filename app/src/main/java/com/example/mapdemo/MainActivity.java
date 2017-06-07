@@ -125,7 +125,7 @@ public final class MainActivity extends AppCompatActivity
         Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
     }
 
-    public boolean getGenerate() {
-        return this.generate;
+    static public boolean getGenerate() {
+        return generate;
     }
 }
