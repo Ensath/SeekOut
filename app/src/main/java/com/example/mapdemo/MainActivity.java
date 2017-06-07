@@ -33,6 +33,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * The main activity of the API library demo gallery.
  * <p>
@@ -40,6 +42,9 @@ import android.widget.Toast;
  */
 public final class MainActivity extends AppCompatActivity
         implements AdapterView.OnItemClickListener {
+
+    static public boolean generate = false;
+    static public LatLng dest = null;
 
 
     /**
@@ -107,14 +112,20 @@ public final class MainActivity extends AppCompatActivity
     }
 
     public void onGenerateClick(View v) {
+        generate = true;
         startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
     }
 
     public void onViewClick(View v) {
+        generate = false;
         startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
     }
 
     public void onFoundClick(View v) {
         Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean getGenerate() {
+        return this.generate;
     }
 }

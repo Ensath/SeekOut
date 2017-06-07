@@ -118,24 +118,26 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
     }
 
     private void findDestination() {
-        LatLng start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        double angle = 2 * PI * random();
-        double distance = (.7525 + .2508 * random())/2;
-        double startLatRad = start.latitude * PI / 180;
-        double startLngRad = start.longitude * PI / 180;
+        if(MainActivity.generate) {
+            LatLng start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            double angle = 2 * PI * random();
+            double distance = (.7525 + .2508 * random()) / 2;
+            double startLatRad = start.latitude * PI / 180;
+            double startLngRad = start.longitude * PI / 180;
 
-        // Distance to LatLng calculation based on "Destination point given distance and bearing from start point" formula
-        // at http://www.movable-type.co.uk/scripts/latlong.html by Chris Veness
-        double destLatRad = Math.asin(Math.sin(startLatRad) * Math.cos(distance / EARTHRADIUS) +
-                Math.cos(startLatRad) * Math.sin(distance / EARTHRADIUS) * Math.cos(angle));
-        double destLngRad = startLngRad + Math.atan2(Math.sin(angle) * Math.sin(distance / EARTHRADIUS) * Math.cos(startLatRad),
-                Math.cos(distance / EARTHRADIUS) - Math.sin(startLatRad) * Math.sin(destLatRad));
+            // Distance to LatLng calculation based on "Destination point given distance and bearing from start point" formula
+            // at http://www.movable-type.co.uk/scripts/latlong.html by Chris Veness
+            double destLatRad = Math.asin(Math.sin(startLatRad) * Math.cos(distance / EARTHRADIUS) +
+                    Math.cos(startLatRad) * Math.sin(distance / EARTHRADIUS) * Math.cos(angle));
+            double destLngRad = startLngRad + Math.atan2(Math.sin(angle) * Math.sin(distance / EARTHRADIUS) * Math.cos(startLatRad),
+                    Math.cos(distance / EARTHRADIUS) - Math.sin(startLatRad) * Math.sin(destLatRad));
 
-        double destLat = destLatRad * 180 / PI;
-        double destLng = destLngRad * 180 / PI;
-        final LatLng destination = new LatLng(destLat, destLng);
-        Log.d("Destination:", destination.toString());
-
+            double destLat = destLatRad * 180 / PI;
+            double destLng = destLngRad * 180 / PI;
+            final LatLng destination = new LatLng(destLat, destLng);
+            Log.d("Destination:", destination.toString());
+            MainActivity.dest = destination;
+        }
         SupportStreetViewPanoramaFragment streetViewPanoramaFragment =
                 (SupportStreetViewPanoramaFragment)
                         getSupportFragmentManager().findFragmentById(R.id.streetviewpanorama);
@@ -145,8 +147,8 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
                         // Only set the panorama to SYDNEY on startup (when no panoramas have been
                         // loaded which is when the savedInstanceState is null).
-                        //if (savedInstanceState == null) {
-                            panorama.setPosition(destination);
+                        //if (MainActivity.generate) {//savedInstanceState == null) {
+                            panorama.setPosition(MainActivity.dest);
                         //}
                     }
                 });
