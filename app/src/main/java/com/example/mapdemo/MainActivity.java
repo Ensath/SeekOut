@@ -79,13 +79,6 @@ public final class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        ListView list = (ListView) findViewById(R.id.list);
-
-        ListAdapter adapter = new CustomArrayAdapter(this, DemoDetailsList.DEMOS);
-
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(this);
-        list.setEmptyView(findViewById(R.id.empty));
     }
 
     @Override
