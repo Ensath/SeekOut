@@ -20,6 +20,7 @@ package com.example.mapdemo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -86,6 +87,11 @@ public final class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        SharedPreferences data = getPreferences(MODE_PRIVATE);
+        // Default destination is the Portlandia statue
+        double destLat = data.getFloat("destLat", (float) 45.51575);
+        double destLon = data.getFloat("destLon", (float) -122.679028);
+        dest = new LatLng(destLat, destLon);
     }
 
     @Override
