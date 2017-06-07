@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -52,6 +53,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
     private static final LatLng PSU = new LatLng(45.5110, -122.6832);
     private static final double EARTHRADIUS = 3959;
     GoogleApiClient mGoogleApiClient = null;
+    Location mLastLocation = null;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();*/
-        LatLng start = PSU; //new LatLng(latitude, longitude);
+        /*LatLng start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         double angle = 2 * PI * random();
         double distance = .7525 + .2508 * random();
         double startLatRad = start.latitude * PI / 180;
@@ -102,7 +104,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                             panorama.setPosition(destination);
                         }
                     }
-                });
+                });*/
     }
 
     private void enableMyLocation() {
@@ -138,13 +140,49 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
             return;
         }
         Log.d("onConnected", "Have permission");
-        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
             Log.d("onConnected", "mLastLocation notnull");
             Log.d("Lat",String.valueOf(mLastLocation.getLatitude()));
             Log.d("Lon",String.valueOf(mLastLocation.getLongitude()));
         }
+        findDestination();
+    }
+
+    private void findDestination() {
+        LatLng start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        double angle = 2 * PI * random();
+        double distance = .7525 + .2508 * random();
+        double startLatRad = start.latitude * PI / 180;
+        double startLngRad = start.longitude * PI / 180;
+
+        // Distance to LatLng calculation based on "Destination point given distance and bearing from start point" formula
+        // at http://www.movable-type.co.uk/scripts/latlong.html by Chris Veness
+        double destLatRad = Math.asin(Math.sin(startLatRad) * Math.cos(distance / EARTHRADIUS) +
+                Math.cos(startLatRad) * Math.sin(distance / EARTHRADIUS) * Math.cos(angle));
+        double destLngRad = startLngRad + Math.atan2(Math.sin(angle) * Math.sin(distance / EARTHRADIUS) * Math.cos(startLatRad),
+                Math.cos(distance / EARTHRADIUS) - Math.sin(startLatRad) * Math.sin(destLatRad));
+
+        double destLat = destLatRad * 180 / PI;
+        double destLng = destLngRad * 180 / PI;
+        final LatLng destination = new LatLng(destLat, destLng);
+        Log.d("Destination:", destination.toString());
+
+        SupportStreetViewPanoramaFragment streetViewPanoramaFragment =
+                (SupportStreetViewPanoramaFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.streetviewpanorama);
+        streetViewPanoramaFragment.getStreetViewPanoramaAsync(
+                new OnStreetViewPanoramaReadyCallback() {
+                    @Override
+                    public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+                        // Only set the panorama to SYDNEY on startup (when no panoramas have been
+                        // loaded which is when the savedInstanceState is null).
+                        //if (savedInstanceState == null) {
+                            panorama.setPosition(destination);
+                        //}
+                    }
+                });
     }
 
     @Override
