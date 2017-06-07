@@ -32,6 +32,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -46,6 +48,9 @@ public final class MainActivity extends AppCompatActivity
 
     static public boolean generate = false;
     static public LatLng dest = null;
+    static private int completions = 0;
+    //TextView progressText = (TextView)findViewById(R.id.progressText);
+    //ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
 
     /**
@@ -92,6 +97,8 @@ public final class MainActivity extends AppCompatActivity
         double destLat = data.getFloat("destLat", (float) 45.51575);
         double destLon = data.getFloat("destLon", (float) -122.679028);
         dest = new LatLng(destLat, destLon);
+        completions = data.getInt("completions", 0);
+        //progressText.setText("My Awesome Text");
     }
 
     @Override
@@ -129,6 +136,7 @@ public final class MainActivity extends AppCompatActivity
 
     public void onFoundClick(View v) {
         Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
+        completions = completions + 1;
     }
 
     static public boolean getGenerate() {
