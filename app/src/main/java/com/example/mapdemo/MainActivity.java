@@ -29,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * The main activity of the API library demo gallery.
@@ -108,5 +109,17 @@ public final class MainActivity extends AppCompatActivity
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DemoDetails demo = (DemoDetails) parent.getAdapter().getItem(position);
         startActivity(new Intent(this, demo.activityClass));
+    }
+
+    public void onGenerateClick(View v) {
+        startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
+    }
+
+    public void onViewClick(View v) {
+        startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
+    }
+
+    public void onFoundClick(View v) {
+        Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
     }
 }

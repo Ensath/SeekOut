@@ -38,18 +38,21 @@
         android:id="@+id/genButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onGenerateClick"
         android:text="@string/generate_panorama" />
 
     <Button
         android:id="@+id/viewButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onViewClick"
         android:text="@string/view_panorama" />
 
     <Button
         android:id="@+id/checkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onFoundClick"
         android:text="@string/made_it" />
 
     <ListView
