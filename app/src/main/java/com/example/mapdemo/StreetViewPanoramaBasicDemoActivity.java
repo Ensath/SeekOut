@@ -148,7 +148,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                         // Only set the panorama to SYDNEY on startup (when no panoramas have been
                         // loaded which is when the savedInstanceState is null).
                         //if (MainActivity.generate) {//savedInstanceState == null) {
-                            panorama.setPosition(MainActivity.dest);
+                            panorama.setPosition(MainActivity.dest, 1120);
                         //}
                     }
                 });
