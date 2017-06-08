@@ -170,4 +170,14 @@ public final class MainActivity extends AppCompatActivity
         completions = 0;
         updateProgress();
     }
+
+    protected void onStop(){
+        super.onStop();
+        SharedPreferences data = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = data.edit();
+        editor.putFloat("destLat", (float) dest.latitude);
+        editor.putFloat("destLon", (float) dest.longitude);
+        editor.putInt("completions",completions);
+        editor.commit();
+    }
 }
