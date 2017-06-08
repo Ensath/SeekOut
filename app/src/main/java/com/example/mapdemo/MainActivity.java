@@ -137,7 +137,7 @@ public final class MainActivity extends AppCompatActivity
     public void onFoundClick(View v) {
         Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
         completions = completions + 1;
-        setProgress();
+        updateProgress();
     }
 
     static public boolean getGenerate() {
@@ -146,17 +146,26 @@ public final class MainActivity extends AppCompatActivity
 
      protected void onPostCreate(Bundle result) {
         super.onPostCreate(result);
-         setProgress();
+         updateProgress();
     }
 
-    void setProgress() {
+    void updateProgress() {
+        ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar);
+        bar.setProgress(completions);
         TextView text = (TextView) findViewById(R.id.progressText);
         if(completions==0) {
             text.setText("");
+        } else if(completions > 4) {
+            text.setText(String.format(getString(R.string.excited_progress), completions));
         } else if(completions!=1) {
-            text.setText(String.format("You have reached %d destinations", completions));
+            text.setText(String.format(getString(R.string.variable_progress), completions));
         } else {
-            text.setText("You have reached 1 destination");
+            text.setText(R.string.first_progress);
         }
+    }
+
+    public void resetProgress(View v) {
+        completions = 0;
+        updateProgress();
     }
 }

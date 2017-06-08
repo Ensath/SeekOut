@@ -59,10 +59,18 @@ This file has been modified from its original form
         android:id="@+id/checkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onFoundClick"
-        android:text="@string/made_it"
         android:layout_gravity="center"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:onClick="onFoundClick"
+        android:text="@string/made_it" />
+
+    <TextView
+        android:id="@+id/challenge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/challenge"
+        android:layout_margin="10dp"
+        android:textSize="24sp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -78,5 +86,13 @@ This file has been modified from its original form
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:onClick="resetProgress"
+        android:text="@string/reset_progress" />
 
 </LinearLayout>

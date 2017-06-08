@@ -244,5 +244,10 @@ This file has been modified from its original form
     <string name="generate_panorama">Generate New Destination</string>
     <string name="view_panorama">View Current Destination</string>
     <string name="made_it">I Found It!</string>
+    <string name="reset_progress">Reset Progress</string>
+    <string name="challenge">See if you can find 5 in one week:</string>
+    <string name="excited_progress">You have reached %d destinations!</string>
+    <string name="variable_progress">You have reached %d destinations.</string>
+    <string name="first_progress">You have reached 1 destination.</string>
 
 </resources>
