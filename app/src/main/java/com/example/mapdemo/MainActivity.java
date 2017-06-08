@@ -51,6 +51,7 @@ public final class MainActivity extends AppCompatActivity
     static public LatLng dest = null;
     static private int completions = 0;
     static public double initDistance = 0.88;
+    static private String initDistanceStr = "0.88";
 
 
     /**
@@ -98,6 +99,7 @@ public final class MainActivity extends AppCompatActivity
         double destLon = data.getFloat("destLon", (float) -122.679028);
         dest = new LatLng(destLat, destLon);
         completions = data.getInt("completions", 0);
+        initDistanceStr = data.getString("initDistanceStr","0.88");
     }
 
     @Override
@@ -147,7 +149,10 @@ public final class MainActivity extends AppCompatActivity
 
      protected void onPostCreate(Bundle result) {
         super.onPostCreate(result);
+         EditText distance = (EditText) findViewById(R.id.distance);
+         distance.setText(initDistanceStr);
          updateProgress();
+
     }
 
     void updateProgress() {
@@ -178,6 +183,8 @@ public final class MainActivity extends AppCompatActivity
         editor.putFloat("destLat", (float) dest.latitude);
         editor.putFloat("destLon", (float) dest.longitude);
         editor.putInt("completions",completions);
+        EditText distance = (EditText) findViewById(R.id.distance);
+        editor.putString("initDistanceStr", distance.getText().toString());
         editor.commit();
     }
 }
