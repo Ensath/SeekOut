@@ -75,6 +75,8 @@ Modified from its original form
     <TextView
         android:id="@+id/progressText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="24sp" />
 
 </LinearLayout>

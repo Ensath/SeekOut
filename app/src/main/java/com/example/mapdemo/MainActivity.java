@@ -137,9 +137,26 @@ public final class MainActivity extends AppCompatActivity
     public void onFoundClick(View v) {
         Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
         completions = completions + 1;
+        setProgress();
     }
 
     static public boolean getGenerate() {
         return generate;
+    }
+
+     protected void onPostCreate(Bundle result) {
+        super.onPostCreate(result);
+         setProgress();
+    }
+
+    void setProgress() {
+        TextView text = (TextView) findViewById(R.id.progressText);
+        if(completions==0) {
+            text.setText("");
+        } else if(completions!=1) {
+            text.setText(String.format("You have reached %d destinations", completions));
+        } else {
+            text.setText("You have reached 1 destination");
+        }
     }
 }
