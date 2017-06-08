@@ -40,6 +40,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import static com.example.mapdemo.MainActivity.initDistance;
 import static java.lang.Math.PI;
 import static java.lang.Math.random;
 
@@ -121,7 +122,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
         if(MainActivity.getGenerate()) {
             LatLng start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             double angle = 2 * PI * random();
-            double distance = (.7525 + .2508 * random()) / 2;
+            double distance = initDistance * 6/7 + initDistance * 2/7 * random();
             double startLatRad = start.latitude * PI / 180;
             double startLngRad = start.longitude * PI / 180;
 

@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -49,8 +50,7 @@ public final class MainActivity extends AppCompatActivity
     static public boolean generate = false;
     static public LatLng dest = null;
     static private int completions = 0;
-    //TextView progressText = (TextView)findViewById(R.id.progressText);
-    //ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
+    static public double initDistance = 0.88;
 
 
     /**
@@ -98,7 +98,6 @@ public final class MainActivity extends AppCompatActivity
         double destLon = data.getFloat("destLon", (float) -122.679028);
         dest = new LatLng(destLat, destLon);
         completions = data.getInt("completions", 0);
-        //progressText.setText("My Awesome Text");
     }
 
     @Override
@@ -126,6 +125,8 @@ public final class MainActivity extends AppCompatActivity
 
     public void onGenerateClick(View v) {
         generate = true;
+        EditText miles = (EditText) findViewById(R.id.distance);
+        initDistance = Double.parseDouble(miles.getText().toString());
         startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
     }
 
