@@ -1,5 +1,5 @@
 // Copyright (c) 2017 Noah Freed
-// Modified from its original form
+// This file has been modified from its original form
 /*
  * Copyright (C) 2012 The Android Open Source Project
  *

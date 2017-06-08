@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
+Copyright (c) 2017 Noah Freed
+This file has been modified from its original form
+
      Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +17,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="demo_title">Google Maps API Demos</string>
+    <string name="demo_title">SeekOut</string>
     <string name="legal_info">Legal Info</string>
     <string name="no_demos">No demos</string>
     <string name="play_services_not_installed">Google Play services is not installed on this device.</string>
