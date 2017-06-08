@@ -153,6 +153,7 @@ public final class MainActivity extends AppCompatActivity
     void updateProgress() {
         ProgressBar bar = (ProgressBar) findViewById(R.id.progressBar);
         bar.setProgress(completions);
+        bar.setScaleY(5F);
         TextView text = (TextView) findViewById(R.id.progressText);
         if(completions==0) {
             text.setText("");
