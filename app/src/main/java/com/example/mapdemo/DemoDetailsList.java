@@ -1,3 +1,5 @@
+// This file has been modified from its original form
+
 /*
  * Copyright (C) 2012 The Android Open Source Project
  *
