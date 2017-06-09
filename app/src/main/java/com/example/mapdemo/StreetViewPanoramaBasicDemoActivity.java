@@ -39,8 +39,10 @@ import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.StreetViewPanoramaLocation;
 
+import static com.example.mapdemo.MainActivity.check;
 import static com.example.mapdemo.MainActivity.completions;
 import static com.example.mapdemo.MainActivity.dest;
+import static com.example.mapdemo.MainActivity.generate;
 import static com.example.mapdemo.MainActivity.initDistance;
 import static com.example.mapdemo.MainActivity.newDest;
 import static java.lang.Math.PI;
@@ -119,6 +121,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
         }
         findDestination();
         if(MainActivity.check) {
+            check = false;
             checkDestination(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         }
     }
@@ -158,6 +161,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                                 if (streetViewPanoramaLocation != null && streetViewPanoramaLocation.links != null) {
                                     // location is present
                                     Log.d("onPanoramaChange","present");
+                                    generate = false;
                                 } else {
                                     // location not available
                                     Log.d("onPanoramaChange","absent");
@@ -170,9 +174,12 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
     }
 
     private void checkDestination(double latitude, double longitude){
-        double MAXOFFSET = 100/111319.9; //double the radius for finding panorama in meters divided by max # of meters in a degree
-        if(dest.latitude - MAXOFFSET < latitude && latitude < dest.latitude + MAXOFFSET &&
-                dest.longitude - MAXOFFSET < longitude && longitude < dest.longitude + MAXOFFSET){
+        //double MAXOFFSET = 100/111319.9; //double the radius for finding panorama in meters divided by max # of meters in a degree
+        //if(dest.latitude - MAXOFFSET < latitude && latitude < dest.latitude + MAXOFFSET &&
+        //        dest.longitude - MAXOFFSET < longitude && longitude < dest.longitude + MAXOFFSET){
+        float result[] = new float[1];
+        Location.distanceBetween(latitude, longitude, dest.latitude, dest.longitude, result);
+        if(result[0] < 100){
             Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
             completions = completions + 1;
             newDest = false;
