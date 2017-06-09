@@ -53,6 +53,7 @@ public final class MainActivity extends AppCompatActivity
     static public int completions = 0;
     static public double initDistance = 0.88;
     static private String initDistanceStr = "0.88";
+    static public boolean newDest = true;
 
 
     /**
@@ -101,6 +102,7 @@ public final class MainActivity extends AppCompatActivity
         dest = new LatLng(destLat, destLon);
         completions = data.getInt("completions", 0);
         initDistanceStr = data.getString("initDistanceStr","0.88");
+        newDest = data.getBoolean("newDest", true);
     }
 
     @Override
@@ -129,6 +131,7 @@ public final class MainActivity extends AppCompatActivity
     public void onGenerateClick(View v) {
         generate = true;
         check = false;
+        newDest = true;
         EditText miles = (EditText) findViewById(R.id.distance);
         initDistance = Double.parseDouble(miles.getText().toString());
         startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
@@ -171,6 +174,7 @@ public final class MainActivity extends AppCompatActivity
         } else {
             text.setText(R.string.first_progress);
         }
+        findViewById(R.id.checkButton).setEnabled(newDest);
     }
 
     public void resetProgress(View v) {
@@ -193,6 +197,7 @@ public final class MainActivity extends AppCompatActivity
         editor.putInt("completions",completions);
         EditText distance = (EditText) findViewById(R.id.distance);
         editor.putString("initDistanceStr", distance.getText().toString());
+        editor.putBoolean("newDest", newDest);
         editor.commit();
     }
 }

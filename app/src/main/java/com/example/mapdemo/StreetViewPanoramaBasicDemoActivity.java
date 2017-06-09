@@ -45,6 +45,7 @@ import android.widget.Toast;
 import static com.example.mapdemo.MainActivity.completions;
 import static com.example.mapdemo.MainActivity.dest;
 import static com.example.mapdemo.MainActivity.initDistance;
+import static com.example.mapdemo.MainActivity.newDest;
 import static java.lang.Math.PI;
 import static java.lang.Math.random;
 
@@ -177,7 +178,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                 dest.longitude - MAXOFFSET < longitude && longitude < dest.longitude + MAXOFFSET){
             Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
             completions = completions + 1;
-            //MainActivity.updateProgress();
+            newDest = false;
         } else {
             Toast.makeText(this, "Not close enough", Toast.LENGTH_SHORT).show();
         }
