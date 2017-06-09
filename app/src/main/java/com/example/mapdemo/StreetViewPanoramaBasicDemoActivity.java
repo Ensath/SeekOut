@@ -26,6 +26,7 @@ import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.StreetViewPanoramaLocation;
 
 import android.Manifest;
 import android.content.Context;
@@ -146,11 +147,20 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                 new OnStreetViewPanoramaReadyCallback() {
                     @Override
                     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-                        // Only set the panorama to SYDNEY on startup (when no panoramas have been
-                        // loaded which is when the savedInstanceState is null).
-                        //if (MainActivity.generate) {//savedInstanceState == null) {
-                            panorama.setPosition(MainActivity.dest, 1120);
-                        //}
+                        panorama.setPosition(MainActivity.dest, 50);
+                        panorama.setOnStreetViewPanoramaChangeListener(new StreetViewPanorama.OnStreetViewPanoramaChangeListener() {
+                            @Override
+                            public void onStreetViewPanoramaChange(StreetViewPanoramaLocation streetViewPanoramaLocation) {
+                                if (streetViewPanoramaLocation != null && streetViewPanoramaLocation.links != null) {
+                                    // location is present
+                                    Log.d("onPanoramaChange","present");
+                                } else {
+                                    // location not available
+                                    Log.d("onPanoramaChange","absent");
+                                    findDestination();
+                                }
+                            }
+                        });
                     }
                 });
     }
