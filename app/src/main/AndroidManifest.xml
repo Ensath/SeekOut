@@ -61,9 +61,6 @@
             android:name=".LegalInfoActivity"
             android:label="@string/legal_info"/>
         <activity
-            android:name=".SaveStateDemoActivity"
-            android:label="@string/save_state_demo_label"/>
-        <activity
             android:name=".StreetViewPanoramaBasicDemoActivity"
             android:label="@string/street_view_panorama_basic_demo_label"/>
 
