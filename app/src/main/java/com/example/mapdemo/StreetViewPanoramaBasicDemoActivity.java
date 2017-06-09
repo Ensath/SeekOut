@@ -40,7 +40,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
+import static com.example.mapdemo.MainActivity.completions;
+import static com.example.mapdemo.MainActivity.dest;
 import static com.example.mapdemo.MainActivity.initDistance;
 import static java.lang.Math.PI;
 import static java.lang.Math.random;
@@ -117,6 +120,9 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
             Log.d("Lon",String.valueOf(mLastLocation.getLongitude()));
         }
         findDestination();
+        if(MainActivity.check) {
+            checkDestination(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        }
     }
 
     private void findDestination() {
@@ -138,7 +144,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
             double destLng = destLngRad * 180 / PI;
             final LatLng destination = new LatLng(destLat, destLng);
             Log.d("Destination:", destination.toString());
-            MainActivity.dest = destination;
+            dest = destination;
         }
         SupportStreetViewPanoramaFragment streetViewPanoramaFragment =
                 (SupportStreetViewPanoramaFragment)
@@ -147,7 +153,7 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                 new OnStreetViewPanoramaReadyCallback() {
                     @Override
                     public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
-                        panorama.setPosition(MainActivity.dest, 50);
+                        panorama.setPosition(dest, 50);
                         panorama.setOnStreetViewPanoramaChangeListener(new StreetViewPanorama.OnStreetViewPanoramaChangeListener() {
                             @Override
                             public void onStreetViewPanoramaChange(StreetViewPanoramaLocation streetViewPanoramaLocation) {
@@ -163,6 +169,18 @@ public class StreetViewPanoramaBasicDemoActivity extends AppCompatActivity imple
                         });
                     }
                 });
+    }
+
+    private void checkDestination(double latitude, double longitude){
+        double MAXOFFSET = 100/111319.9; //double the radius for finding panorama in meters divided by max # of meters in a degree
+        if(dest.latitude - MAXOFFSET < latitude && latitude < dest.latitude + MAXOFFSET &&
+                dest.longitude - MAXOFFSET < longitude && longitude < dest.longitude + MAXOFFSET){
+            Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
+            completions = completions + 1;
+            //MainActivity.updateProgress();
+        } else {
+            Toast.makeText(this, "Not close enough", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -48,8 +48,9 @@ public final class MainActivity extends AppCompatActivity
         implements AdapterView.OnItemClickListener {
 
     static public boolean generate = false;
+    static public boolean check = false;
     static public LatLng dest = null;
-    static private int completions = 0;
+    static public int completions = 0;
     static public double initDistance = 0.88;
     static private String initDistanceStr = "0.88";
 
@@ -127,6 +128,7 @@ public final class MainActivity extends AppCompatActivity
 
     public void onGenerateClick(View v) {
         generate = true;
+        check = false;
         EditText miles = (EditText) findViewById(R.id.distance);
         initDistance = Double.parseDouble(miles.getText().toString());
         startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
@@ -134,13 +136,14 @@ public final class MainActivity extends AppCompatActivity
 
     public void onViewClick(View v) {
         generate = false;
+        check = false;
         startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
     }
 
     public void onFoundClick(View v) {
-        Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
-        completions = completions + 1;
-        updateProgress();
+        generate = false;
+        check = true;
+        startActivity(new Intent(this, StreetViewPanoramaBasicDemoActivity.class));
     }
 
     static public boolean getGenerate() {
@@ -152,7 +155,6 @@ public final class MainActivity extends AppCompatActivity
          EditText distance = (EditText) findViewById(R.id.distance);
          distance.setText(initDistanceStr);
          updateProgress();
-
     }
 
     void updateProgress() {
@@ -173,6 +175,12 @@ public final class MainActivity extends AppCompatActivity
 
     public void resetProgress(View v) {
         completions = 0;
+        updateProgress();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         updateProgress();
     }
 
