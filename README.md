@@ -11,3 +11,11 @@ License
 -------
 
 For license information about the Google Maps Android API demos, please refer to their [LICENSE](https://github.com/googlemaps/android-samples/blob/master/LICENSE).
+
+How to Use
+-------
+(Download the .apk)[http://noahfreed.com/res/SeekOut.apk] onto an Android phone and install it. Open the app.
+
+More Information
+-------
+For more details, see the (presentation PDF)[https://github.com/Ensath/SeekOut/blob/master/SeekOutPresentation.pdf].
