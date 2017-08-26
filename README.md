@@ -1,7 +1,7 @@
 SeekOut
 ===================================
 
-An exercise and exploration app
+An exercise and exploration app that challenges the user to find random destinations
 
 Copyright (c) 2017 Noah Freed
 
